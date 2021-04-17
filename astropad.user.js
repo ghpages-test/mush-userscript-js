@@ -1,5 +1,3 @@
-//testest
-
 // ==UserScript==
 // @name       AstroPad
 // @version    0.28.11
@@ -19,14 +17,19 @@
 // @downloadURL https://github.com/badconker/astropad/raw/master/astropad.user.js
 // ==/UserScript==
 
+var jq = document.createElement("script");
+jq.src = "https://code.jquery.com/jquery-2.2.1.min.js";
+document.head.appendChild(jq);
+
+var pf = document.createElement("script");
+pf.src = "https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js";
+document.head.appendChild(pf);
 
 var console = window.console;
 var localStorage = window.localStorage;
 var Main = window.Main;
 
-Main.AstroPad = createObjectIn(window.Main, { defineAs: 'AstroPad' });
-
-Main.AstroPad.version = GM.info.script.version || "0.28.5"; //For use by other scripts
+Main.AstroPad = {};
 Main.AstroPad.urlAstro = "http://astropad.sunsky.fr/api.py";
 Main.AstroPad.heronames = ['Jin Su', 'Frieda', 'Kuan Ti', 'Janice', 'Roland', 'Hua', 'Paola', 'Chao', 'Finola', 'Stephen', 'Ian', 'Chun', 'Raluca', 'Gioele', 'Eleesha', 'Terrence', 'Derek', 'Andie'];
 Main.AstroPad.heronames[-1] = "?";
@@ -706,17 +709,18 @@ Main.AstroPad.sendData = function (sendCallback) {
 
     data += "&conso=" + encodeURIComponent(conso);
     console.log(url + '?' + data);
-
-    GM.xmlHttpRequest({
-        method: 'POST', url: url, data: data, headers: { 'Content-type': 'application/x-www-form-urlencoded' },
-        onload: function (responseDetails) {
-            //console.log(responseDetails.responseText);
-            Main.AstroPad.getInventory();
-            if (typeof sendCallback == 'function') {
-                sendCallback();
+    /*
+        GM.xmlHttpRequest({
+            method: 'POST', url: url, data: data, headers: { 'Content-type': 'application/x-www-form-urlencoded' },
+            onload: function (responseDetails) {
+                //console.log(responseDetails.responseText);
+                Main.AstroPad.getInventory();
+                if (typeof sendCallback == 'function') {
+                    sendCallback();
+                }
             }
-        }
-    });
+        });
+        */
 };
 
 Main.AstroPad.addItem = function (sendCallback) {
@@ -1541,6 +1545,7 @@ Main.AstroPad.new = function () {
     var url = Main.AstroPad.urlAstro + "/newInv";
     var data = "api=1";
     console.log(url + '?' + data);
+    /*
     GM.xmlHttpRequest({
         method: 'GET',
         url: url + "?" + data,
@@ -1558,6 +1563,7 @@ Main.AstroPad.new = function () {
             }
         }
     });
+    */
 };
 
 Main.AstroPad.analyseFoodEffect = function (line) {
@@ -1777,6 +1783,7 @@ Main.AstroPad.getInventory = function (callback) {
     Main.AstroPad.fill($('<div>').css('text-align', 'center').html("<img src='/img/icons/ui/loading1.gif' /> " + Main.AstroPad.txt.loading));
 
     console.log(url + '?' + data);
+    /*
     GM.xmlHttpRequest({
         method: 'GET',
         url: url + "?" + data,
@@ -1926,6 +1933,7 @@ Main.AstroPad.getInventory = function (callback) {
             }
         }
     });
+    */
 };
 exportFunction(Main.AstroPad.getInventory, window.Main.AstroPad, { defineAs: 'getInventory' });
 
