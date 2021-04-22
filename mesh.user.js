@@ -9,7 +9,7 @@ jq.src = "https://code.jquery.com/jquery-2.2.1.min.js";
 document.head.appendChild(jq);
 
 var i18 = document.createElement("script");
-i18.src = "https://raw.githubusercontent.com/Javiernh/MESH/master/lib/i18next.js";
+i18.src = "https://cdn.jsdelivr.net/gh/Javiernh/MESH/lib/i18next.js";
 document.head.appendChild(i18);
 
 
