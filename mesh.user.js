@@ -49,7 +49,6 @@ MESH.initLang = function () {
                 i18next.init(translationData);
             })
         });
-        i18next.changeLanguage(MESH.lang);
     } catch (err) {
         console.error("Error getting translation data:", err);
     }
